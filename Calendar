@@ -1,0 +1,46 @@
+// Import necessary libraries
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.Scanner;
+
+public class CalendarPrinter {
+    public static void main(String[] args) {
+        // Create a Scanner object to get user input
+        Scanner scanner = new Scanner(System.in);
+
+        // Ask user for year and month
+        System.out.print("Enter the year: ");
+        int year = scanner.nextInt();
+        System.out.print("Enter the month (1-12): ");
+        int month = scanner.nextInt();
+
+        // Print the calendar for the given month and year
+        printCalendar(year, month);
+    }
+
+    /**
+     * Prints the calendar for the given month and year.
+     * 
+     * @param year  The year of the calendar.
+     * @param month The month of the calendar (1-12).
+     */
+    public static void printCalendar(int year, int month) {
+        // Get the year and month object
+        YearMonth yearMonth = YearMonth.of(year, month);
+
+        // Get the month name
+        String monthName = yearMonth.getMonth().name().substring(0, 1).toUpperCase()
+                + yearMonth.getMonth().name().substring(1).toLowerCase();
+
+        // Print the month and year
+        System.out.println("Calendar for the month of " + monthName + ", " + year);
+        System.out.println("Su Mo Tu We Th Fr Sa");
+
+        // Get the day of week of the first day of the month
+        LocalDate firstDay = yearMonth.atDay(1);
+        DayOfWeek firstDayOfWeek = firstDay.getDayOfWeek();
+        int dayOfWeekValue = firstDayOfWeek.getValue() % 7; // 1 (Monday) to 7 (Sunday)
+
+        // Print spaces for the days before the first day
+        for (int i = 0;
